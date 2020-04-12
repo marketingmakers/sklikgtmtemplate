@@ -1,5 +1,5 @@
 homepage: "https://marketingmakers.net/"
 documentation: "https://github.com/marketingmakers/sklikgtmtemplate"
 versions:
-  - sha: a71f74de13a9455572b9a454954fc46be41a699c
+  - sha: b629add86c957ecee89a30d973b48d80661171fa
     changeNotes: Initial release.
