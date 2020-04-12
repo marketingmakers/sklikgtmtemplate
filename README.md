@@ -1,5 +1,4 @@
-# sklikgtmtemplate
-Sklik template pro Google Tag Manager
+# Šablona pro Sklik retargeting a konverze do Google Tag Manager
 
 Umí kompletní strukturu tagů od Sklik, konkrétně dokáže nastavit kompletně tyto tagy: 
 
@@ -22,6 +21,18 @@ var seznam_value = Y;
 </script>
 <script type="text/javascript" src="//c.imedia.cz/js/retargeting.js"></script>
 ```
+## Postup nasazení
+Dokud nebude šablona na oficiálním repository (nebude kompletně protestována), tak je nutné šablonu nasadit ručně. 
+
+1. Stáhněte si soubor template.tpl
+2. V menu v Google Tag Manager zvolte Templates (Šablony)
+3. Vytvořte novou šablonu.
+4. V pravém horním rohu rozklikněte tři tečky a zvolte Import.
+5. A je to. Nyní můžete tvořit kompletní Sklik tagy:
+
+![Ukázka Sklik tagu](https://resources.marketingmakers.net/sklikgtmtemplate/template_preview.png)
+
+## Důležité upozornění
 Jedná se o první verzi, která byla testována jen na několika projektech.
 
 Prosím, pište všechny chyby a poznámky na michal@marketingmakers.net
