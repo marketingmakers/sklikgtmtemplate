@@ -14,7 +14,7 @@ ___INFO___
   "version": 1,
   "securityGroups": [],
   "displayName": "Sklik - neoficiální - alfa verze",
-  "categories": ["REMARKETING", "ADVERTISING"]
+  "categories": ["REMARKETING", "ADVERTISING"],
   "brand": {
     "id": "MarketingMakers",
     "displayName": "MarketingMakers.net",
