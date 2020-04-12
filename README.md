@@ -1,8 +1,6 @@
 # sklikgtmtemplate
 Sklik template pro Google Tag Manager
 
-Zatím v první alfa verzi. 
-
 Umí kompletní strukturu tagů od Sklik, konkrétně dokáže nastavit kompletně tyto tagy: 
 
 ``` HTML
@@ -24,6 +22,6 @@ var seznam_value = Y;
 </script>
 <script type="text/javascript" src="//c.imedia.cz/js/retargeting.js"></script>
 ```
-Jedná se o první verzi. 
+Jedná se o první verzi, která byla testována jen na několika projektech.
 
 Prosím, pište všechny chyby a poznámky na michal@marketingmakers.net
