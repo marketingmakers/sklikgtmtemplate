@@ -5,6 +5,7 @@ Zatím v první alfa verzi.
 
 Umí kompletní strukturu tagů od Sklik, konkrétně dokáže nastavit kompletně tyto tagy: 
 
+``` HTML
 <!-- Měřicí kód Sklik.cz pro konverze -->
 <script type="text/javascript">
 var seznam_cId = X;
@@ -22,3 +23,7 @@ var seznam_value = Y;
 	/* ]]> */
 </script>
 <script type="text/javascript" src="//c.imedia.cz/js/retargeting.js"></script>
+```
+Jedná se o první verzi. 
+
+Prosím, pište všechny chyby a poznámky na michal@marketingmakers.net
