@@ -1,5 +1,7 @@
 # Šablona pro Sklik retargeting a konverze do Google Tag Manager
 
+Short description in English: This template is dedicated to PPC platform Sklik from Seznam.cz that is popular mainly in the Czech republic. By this template you are able to send both retargeting and conversion data. Other description follows in Czech language.
+
 Umí kompletní strukturu tagů od Sklik, konkrétně dokáže nastavit kompletně tyto tagy: 
 
 ``` HTML
