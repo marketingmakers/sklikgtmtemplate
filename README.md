@@ -24,13 +24,9 @@ var seznam_value = Y;
 <script type="text/javascript" src="//c.imedia.cz/js/retargeting.js"></script>
 ```
 ## Postup nasazení
-Dokud nebude šablona na oficiálním repository (nebude kompletně protestována), tak je nutné šablonu nasadit ručně. 
+Při výběru tagu zvolte "Discover more tag types in the Community Template Gallery", vyhledejte tag Sklik a povolte nezbytná oprávnění. Takto přidaný tag vám bude nabízet i možnost aktualizací při úpravách. 
 
-1. Stáhněte si soubor template.tpl
-2. V menu v Google Tag Manager zvolte Templates (Šablony)
-3. Vytvořte novou šablonu.
-4. V pravém horním rohu rozklikněte tři tečky a zvolte Import.
-5. A je to. Nyní můžete tvořit kompletní Sklik tagy:
+Dokud tag nebude schválen v template gallery, je nutné stáhnout soubor template.tpl, v GTM zvolte Šablony a vytvořte novou šablonu. V pravém horním rohu rozklikněte tři tečky a zvolte Import.
 
 ![Ukázka Sklik tagu](https://resources.marketingmakers.net/sklikgtmtemplate/template_preview.png)
 
