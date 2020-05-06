@@ -13,7 +13,7 @@ ___INFO___
   "id": "cvt_temp_public_id",
   "version": 1,
   "securityGroups": [],
-  "displayName": "Sklik - alfa version",
+  "displayName": "Sklik",
   "categories": ["REMARKETING", "ADVERTISING"],
   "brand": {
     "id": "MarketingMakers",
