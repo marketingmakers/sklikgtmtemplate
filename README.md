@@ -32,5 +32,5 @@ Při výběru tagu zvolte "Discover more tag types in the Community Template Gal
 [![Návod k nasazení tagu na YouTube](https://resources.marketingmakers.net/sklikgtmtemplate/sklik_template_ytb.png)](https://youtu.be/bcmNIpcvzl0 "Návod k nasazení tagu na YouTube")
 
 
-## Důležité upozornění
-Jedná se o alfa verzi tagu, která je testována na cca 15ti projektech. Zatím bez jakýchkoliv problémů. I tak prosíme o obezřetnost a hlášení všeho nestandardního na michal@marketingmakers.net
+## Problémy a podpora
+Veškeré problémy nebo i podezření na problém prosím hlaste na michal@marketingmakers.net nebo vytvořte issue zde na GitHubu. 
