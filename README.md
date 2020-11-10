@@ -1,14 +1,19 @@
-# Šablona pro Sklik retargeting a konverze do Google Tag Manager
+# Šablona pro Sklik a Zboží retargeting a konverze do Google Tag Manager
 
 Short description in English: This template is dedicated to PPC platform Sklik from Seznam.cz that is popular mainly in the Czech republic. By this template you are able to send both retargeting and conversion data. Other description follows in Czech language.
 
 S touto šablonou nastavíte tag pro retargeting i konverze. Není tedy nutné kopírovat a vkládat tyto kódy, které vygeneruje Sklik, vše je možné dělat v příjemném uživatelském rozhraní.  
 
+Šablona podporuje i novou verzi sjednoceného kódu, kdy Sklik kód slouží i pro zaslání konverze do Zbozi.cz
+
 ``` HTML
-<!-- Měřicí kód Sklik.cz pro konverze -->
+<!-- Měřicí kód Sklik.cz a Zbozi.cz pro konverze -->
 <script type="text/javascript">
 var seznam_cId = X;
 var seznam_value = Y;
+var seznam_orderId = YYY;
+var seznam_zboziId = 838;
+var seznam_zboziType = "standard";	
 </script>
 <script type="text/javascript" src="https://www.seznam.cz/rs/static/rc.js" async></script>
 
