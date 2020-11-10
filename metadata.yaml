@@ -1,6 +1,8 @@
 homepage: "https://marketingmakers.net/"
 documentation: "https://github.com/marketingmakers/sklikgtmtemplate"
 versions:
+  - sha: d7754551976b818f38a12ef715533df75edf7d24
+    changeNotes: Adding Zbozi.cz support to Sklik GTM template
   - sha: f1c30b8535447a5caca6f02d3b949c0cc758c9cb
     changeNotes: Logging to console only when error occure. 
   - sha: c047b693fed32aa5ca3993dd65c498912d4b719f
