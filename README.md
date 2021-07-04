@@ -4,7 +4,7 @@ Short description in English: This template is dedicated to PPC platform Sklik f
 
 S touto šablonou nastavíte tag pro retargeting i konverze. Není tedy nutné kopírovat a vkládat tyto kódy, které vygeneruje Sklik, vše je možné dělat v příjemném uživatelském rozhraní.  
 
-Šablona podporuje i novou verzi sjednoceného kódu, kdy Sklik kód slouží i pro zaslání konverze do Zbozi.cz
+Šablona podporuje novou verzi sjednoceného kódu, kdy Sklik kód slouží i pro zaslání konverze do Zbozi.cz. Také je možné použít více konverzních ID oddělených čárkou. 
 
 ``` HTML
 <!-- Měřicí kód Sklik.cz a Zbozi.cz pro konverze -->
