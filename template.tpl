@@ -26,7 +26,6 @@ ___INFO___
   ]
 }
 
-
 ___TEMPLATE_PARAMETERS___
 
 [
@@ -118,7 +117,8 @@ ___TEMPLATE_PARAMETERS___
         "paramValue": "konverze",
         "type": "EQUALS"
       }
-    ]
+    ],
+    "help": "Můžete zadat více konverzních ID oddělených čárkou."
   },
   {
     "type": "TEXT",
@@ -226,7 +226,14 @@ if (queryPermission('inject_script', url)) {
     
   
 } else if (data.typ == "konverze") { // Seznam konverze
-	if (data.cId) {  setInWindow('seznam_cId', data.cId*1, true); } 
+      var convIds;
+      if (data.cId) { convIds = data.cId; }
+      var ids = [];
+      convIds.split(',').forEach(convId => {
+      ids.push(convId*1);
+    });  
+  
+	if (ids) {  setInWindow('seznam_cId', ids, true); } 
     if (data.value) { setInWindow('seznam_value', data.value*1, true);  }
     if (data.orderId) { setInWindow('seznam_orderId', data.orderId, true);  }
     if (data.zboziId) { setInWindow('seznam_zboziId', data.zboziId*1, true);  }  
@@ -678,5 +685,3 @@ scenarios: []
 ___NOTES___
 
 Created on 4/13/2020, 12:13:21 AM
-
-
