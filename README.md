@@ -14,6 +14,8 @@ var seznam_value = Y;
 var seznam_orderId = YYY;
 var seznam_zboziId = 838;
 var seznam_zboziType = "standard";	
+var rc = rc || {};
+rc.consent = 1;	// dokud v GTM nezvolíte souhlas poskytnut nebo neposkytnut, posílá je rc.consent undefined
 </script>
 <script type="text/javascript" src="https://www.seznam.cz/rs/static/rc.js" async></script>
 
@@ -24,6 +26,8 @@ var seznam_zboziType = "standard";
         var seznam_itemId = "id";
         var seznamPagetype = "offerdetail";
         var seznam_category = "název_kategorie";
+	var rc = rc || {};
+	rc.consent = 1;
 	/* ]]> */
 </script>
 <script type="text/javascript" src="//c.imedia.cz/js/retargeting.js"></script>
