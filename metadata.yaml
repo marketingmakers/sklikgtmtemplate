@@ -1,6 +1,8 @@
 homepage: "https://marketingmakers.net/"
 documentation: "https://github.com/marketingmakers/sklikgtmtemplate"
 versions:
+  - sha: 3f6fa908295561a85aaa9b1941422fe7984de751
+    changeNotes: Codes transfered to unified conversion/retargeting code. Two conversion IDs option disabled. Please use two tags instead. 
   - sha: f2a52d4fbadf05288b057dabe9fd7039f927d60b
     changeNotes: Added consent option
   - sha: 26cefe27482308787fcc50b10479b9b094bddab5
