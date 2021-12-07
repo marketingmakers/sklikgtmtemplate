@@ -49,6 +49,12 @@ Při výběru tagu zvolte "Discover more tag types in the Community Template Gal
 
 [![Návod k nasazení tagu na YouTube](https://resources.marketingmakers.net/sklikgtmtemplate/sklik_template_ytb.png)](https://youtu.be/bcmNIpcvzl0 "Návod k nasazení tagu na YouTube")
 
+## Jak číst souhlas z proměnné a spouštět Sklik tag se správným oprávněním?
+Pokud chcete pouštět Sklik tag se správnou úrovní souhlasu, je více cest, jak toho dosáhnout. Jednu s využitím Tag Manageru ukazujeme zde:
+
+[![Jak číst souhlas z proměnné a spouštět Sklik tag se správným oprávněním](https://resources.marketingmakers.net/sklikgtmtemplate/cteni_souhlasu.JPG)](https://youtu.be/B8RaDx4reCg "Návod k čtení souhlasu z proměnné")
+
+
 
 ## Problémy a podpora
 Veškeré problémy nebo i podezření na problém prosím hlaste na michal@marketingmakers.net nebo vytvořte issue zde na GitHubu. 
