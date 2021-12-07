@@ -52,7 +52,7 @@ Při výběru tagu zvolte "Discover more tag types in the Community Template Gal
 ## Jak číst souhlas z proměnné a spouštět Sklik tag se správným oprávněním?
 Pokud chcete pouštět Sklik tag se správnou úrovní souhlasu, je více cest, jak toho dosáhnout. Jednu s využitím Tag Manageru ukazujeme zde:
 
-[![Jak číst souhlas z proměnné a spouštět Sklik tag se správným oprávněním](https://resources.marketingmakers.net/sklikgtmtemplate/cteni_souhlasu.JPG)](https://youtu.be/B8RaDx4reCg "Návod k čtení souhlasu z proměnné")
+[![Jak číst souhlas z proměnné a spouštět Sklik tag se správným oprávněním](https://resources.marketingmakers.net/sklikgtmtemplate/cteni_souhlasu2.JPG)](https://youtu.be/B8RaDx4reCg "Návod k čtení souhlasu z proměnné")
 
 
 
