@@ -1,6 +1,8 @@
 homepage: "https://marketingmakers.net/"
 documentation: "https://github.com/marketingmakers/sklikgtmtemplate"
 versions:
+  - sha: df770491a817e9ea3fa2980c3c25463bb483e1fa
+    changeNotes: Fixed problem with pageType parameter, basic support of Google Consent Mode
   - sha: 3f6fa908295561a85aaa9b1941422fe7984de751
     changeNotes: Codes transfered to unified conversion/retargeting code. Two conversion IDs option disabled. Please use two tags instead. 
   - sha: f2a52d4fbadf05288b057dabe9fd7039f927d60b
