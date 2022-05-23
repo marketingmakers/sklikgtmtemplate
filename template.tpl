@@ -11,7 +11,7 @@ ___INFO___
 {
   "type": "TAG",
   "id": "cvt_temp_public_id",
-  "version": 1,
+  "version": 1.4,
   "securityGroups": [],
   "displayName": "Sklik & Zbozi.cz",
   "categories": [
@@ -222,11 +222,19 @@ ___TEMPLATE_PARAMETERS___
       {
         "value": 0,
         "displayValue": "Neposkytnut"
+      },
+      {
+        "value": "cmp_a",
+        "displayValue": "Dle souhlasu v analytics_storage"
+      },
+      {
+        "value": "cmp_m",
+        "displayValue": "Dle souhlasu v ad_storage"
       }
     ],
     "simpleValueType": true,
     "notSetText": "Neurčeno",
-    "help": "Hodnota parametru consent pro tento tag. Defaultně se předává hodnota undefined, Poskytnut \u003d 1, Neposkytnut \u003d 0, zkušenější uživatelé mohou hodnotu načítat z proměnné."
+    "help": "Hodnota parametru consent pro tento tag. Defaultně se předává hodnota undefined, Poskytnut \u003d 1, Neposkytnut \u003d 0, pokud využíváte Google consent mode, můžete číst aktuální hodnotu v ad_storage nebo analytics_storage. Zkušenější uživatelé mohou hodnotu načítat z proměnné."
   }
 ]
 
@@ -241,6 +249,7 @@ const setInWindow = require('setInWindow');
 const callInWindow = require('callInWindow');
 const accessrc = queryPermission('access_globals', 'readwrite', 'rc');
 const accessrce = queryPermission('access_globals', 'execute', 'rc.retargetingHit');
+const isConsentGranted = require('isConsentGranted');
 
 
 // If the script fails to load, log a message and signal failure
@@ -257,10 +266,29 @@ if (data.typ == "rtgt") {
     let retargetingConf = {};
 	if (data.rtgtid) { retargetingConf.rtgId = data.rtgtid*1;  } 
     if (data.itemId) { retargetingConf.itemId = data.itemId;  }
-    if (data.pagetype) { retargetingConf.pageType = data.pageType; }  
+    if (data.pagetype) { retargetingConf.pageType = data.pagetype; }  
     if (data.category) {  retargetingConf.category = data.category; } 
     if (data.rtgUrl) {  retargetingConf.rtgUrl = data.rtgUrl; }   
-    if (typeof data.consent !== "undefined") {  retargetingConf.consent = data.consent; } 
+    if (typeof data.consent !== "undefined") {  
+      let consentnow;
+      switch(data.consent) {
+        case "1": 
+          consentnow = 1;
+          break;
+        case "0": 
+          consentnow = 0;
+          break;
+        case "cmp_a":
+           if(isConsentGranted('analytics_storage')) { consentnow = 1; } else { consentnow = 0; }
+           break;
+        case "cmp_m":
+           if(isConsentGranted('ad_storage')) { consentnow = 1; } else { consentnow = 0; }          
+           break;
+        default: 
+           consentnow = data.consent;
+      }                   
+      retargetingConf.consent = consentnow; 
+    } 
   
     setInWindow('retargetingConf', retargetingConf, true);
     callInWindow('rc.retargetingHit',retargetingConf);
@@ -270,11 +298,30 @@ if (data.typ == "rtgt") {
       let conversionConf = {};
   
 	if (data.cId) { conversionConf.id = data.cId*1; } 
-    if (data.value) { conversionConf.value = data.value*1;  }
+    if (data.value) { conversionConf.value = data.value*1;  } else  { conversionConf.value = null; }
     if (data.orderId) { conversionConf.orderId = data.orderId;  }
     if (data.zboziId) { conversionConf.zboziId = data.zboziId*1;  }  
     if (data.zboziType) { conversionConf.zboziType = data.zboziType;  }
-    if (typeof data.consent !== "undefined")  {  conversionConf.consent = data.consent; }      
+    if (typeof data.consent !== "undefined") {  
+      let consentnow;
+      switch(data.consent) {
+        case "1": 
+          consentnow = 1;
+          break;
+        case "0": 
+          consentnow = 0;
+          break;
+        case "cmp_a":
+           if(isConsentGranted('analytics_storage')) { consentnow = 1; } else { consentnow = 0; }
+           break;
+        case "cmp_m":
+           if(isConsentGranted('ad_storage')) { consentnow = 1; } else { consentnow = 0; }          
+           break;
+        default: 
+           consentnow = data.consent;
+      }                   
+      conversionConf.consent = consentnow; 
+    }   
   
    setInWindow('conversionConf', conversionConf, true);
    callInWindow('rc.conversionHit',conversionConf);
@@ -544,6 +591,90 @@ ___WEB_PERMISSIONS___
                   {
                     "type": 8,
                     "boolean": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "clientAnnotations": {
+      "isEditedByUser": true
+    },
+    "isRequired": true
+  },
+  {
+    "instance": {
+      "key": {
+        "publicId": "access_consent",
+        "versionId": "1"
+      },
+      "param": [
+        {
+          "key": "consentTypes",
+          "value": {
+            "type": 2,
+            "listItem": [
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "consentType"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "analytics_storage"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": false
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "consentType"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "ad_storage"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": false
                   }
                 ]
               }
