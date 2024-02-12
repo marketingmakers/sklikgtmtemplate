@@ -11,7 +11,7 @@ ___INFO___
 {
   "type": "TAG",
   "id": "cvt_temp_public_id",
-  "version": 1.4,
+  "version": 1.5,
   "securityGroups": [],
   "displayName": "Sklik & Zbozi.cz",
   "categories": [
@@ -212,29 +212,79 @@ ___TEMPLATE_PARAMETERS___
   {
     "type": "SELECT",
     "name": "consent",
-    "displayName": "Souhlas se souvisejícími cookies od uživatele",
+    "displayName": "Souhlas s cookies (default je 0 - nesouhlas)",
     "macrosInSelect": true,
     "selectItems": [
       {
-        "value": 1,
-        "displayValue": "Poskytnut"
-      },
-      {
-        "value": 0,
-        "displayValue": "Neposkytnut"
+        "value": "cmp_m",
+        "displayValue": "Dle souhlasu v ad_storage"
       },
       {
         "value": "cmp_a",
         "displayValue": "Dle souhlasu v analytics_storage"
       },
       {
-        "value": "cmp_m",
-        "displayValue": "Dle souhlasu v ad_storage"
+        "value": 0,
+        "displayValue": "Neposkytnut"
+      },
+      {
+        "value": 1,
+        "displayValue": "Poskytnut"
       }
     ],
     "simpleValueType": true,
-    "notSetText": "Neurčeno",
-    "help": "Hodnota parametru consent pro tento tag. Defaultně se předává hodnota undefined, Poskytnut \u003d 1, Neposkytnut \u003d 0, pokud využíváte Google consent mode, můžete číst aktuální hodnotu v ad_storage nebo analytics_storage. Zkušenější uživatelé mohou hodnotu načítat z proměnné."
+    "notSetText": "Vyberte způsob předání souhlasu",
+    "help": "Hodnota parametru consent pro tento tag. Defaultně se předává hodnota 0. Poskytnut předá hodnotu 1, Neposkytnut \u003d 0, pokud využíváte Google Consent Mode, můžete číst aktuální hodnotu v ad_storage nebo analytics_storage. Zkušenější uživatelé mohou hodnotu načítat z proměnné."
+  },
+  {
+    "type": "GROUP",
+    "name": "is",
+    "displayName": "Osobní údaje uživatelů",
+    "groupStyle": "ZIPPY_OPEN",
+    "subParams": [
+      {
+        "type": "TEXT",
+        "name": "eid",
+        "displayName": "E-mail (eid)",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "tid",
+        "displayName": "Telefon (tid)",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "a1",
+        "displayName": "Stát (a1)",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "a2",
+        "displayName": "Město (a2)",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "a3",
+        "displayName": "Ulice (a3)",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "a4",
+        "displayName": "Číslo popisné (a4)",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "a5",
+        "displayName": "PSČ (a5)",
+        "simpleValueType": true
+      }
+    ]
   }
 ]
 
@@ -247,8 +297,6 @@ const injectScript = require('injectScript');
 const queryPermission = require('queryPermission');
 const setInWindow = require('setInWindow');
 const callInWindow = require('callInWindow');
-const accessrc = queryPermission('access_globals', 'readwrite', 'rc');
-const accessrce = queryPermission('access_globals', 'execute', 'rc.retargetingHit');
 const isConsentGranted = require('isConsentGranted');
 
 
@@ -269,30 +317,10 @@ if (data.typ == "rtgt") {
     if (data.pagetype) { retargetingConf.pageType = data.pagetype; }  
     if (data.category) {  retargetingConf.category = data.category; } 
     if (data.rtgUrl) {  retargetingConf.rtgUrl = data.rtgUrl; }   
-    if (typeof data.consent !== "undefined") {  
-      let consentnow;
-      switch(data.consent) {
-        case "1": 
-          consentnow = 1;
-          break;
-        case "0": 
-          consentnow = 0;
-          break;
-        case "cmp_a":
-           if(isConsentGranted('analytics_storage')) { consentnow = 1; } else { consentnow = 0; }
-           break;
-        case "cmp_m":
-           if(isConsentGranted('ad_storage')) { consentnow = 1; } else { consentnow = 0; }          
-           break;
-        default: 
-           consentnow = data.consent;
-      }                   
-      retargetingConf.consent = consentnow; 
-    } 
-  
+    retargetingConf.consent = returnconsent(data.consent);
+    if(data.eid||data.tid||data.a1||data.a2||data.a3||data.a4||data.a5)  { sznidentities(); }
     setInWindow('retargetingConf', retargetingConf, true);
     callInWindow('rc.retargetingHit',retargetingConf);
-
   
 } else if (data.typ == "konverze") { // Seznam konverze
       let conversionConf = {};
@@ -302,9 +330,23 @@ if (data.typ == "rtgt") {
     if (data.orderId) { conversionConf.orderId = data.orderId;  }
     if (data.zboziId) { conversionConf.zboziId = data.zboziId*1;  }  
     if (data.zboziType) { conversionConf.zboziType = data.zboziType;  }
-    if (typeof data.consent !== "undefined") {  
+    conversionConf.consent = returnconsent(data.consent); 
+    if(data.eid||data.tid||data.a1||data.a2||data.a3||data.a4||data.a5)  { sznidentities(); }
+    setInWindow('conversionConf', conversionConf, true);
+    callInWindow('rc.conversionHit',conversionConf);
+}
+    data.gtmOnSuccess();
+};
+
+let url = 'https://c.seznam.cz/js/rc.js';
+if (queryPermission('inject_script', url)) {
+  injectScript(url, onSuccess, onFailure);
+}
+
+const returnconsent = (state) => {
       let consentnow;
-      switch(data.consent) {
+      if (typeof state !== "undefined") {  
+      switch(state) {
         case "1": 
           consentnow = 1;
           break;
@@ -318,23 +360,27 @@ if (data.typ == "rtgt") {
            if(isConsentGranted('ad_storage')) { consentnow = 1; } else { consentnow = 0; }          
            break;
         default: 
-           consentnow = data.consent;
-      }                   
-      conversionConf.consent = consentnow; 
-    }   
-  
-   setInWindow('conversionConf', conversionConf, true);
-   callInWindow('rc.conversionHit',conversionConf);
+           consentnow = state;
+      }                 
+    }  else  { consentnow = 0; } 
+    return consentnow;
+};  
 
-    
-}
-    data.gtmOnSuccess();
+const sznidentities = () => {      
+          let identita = {};
+          identita.aid = {};
+          if(data.eid) { identita.eid = data.eid; }
+          if(data.tid) { identita.tid = data.tid; }
+    if(data.a1||data.a2||data.a3||data.a4||data.a5)  {
+          identita.aid = {}; 
+          if(data.a1) { identita.aid.a1 = data.a1; }
+          if(data.a2) { identita.aid.a2 = data.a2; }
+          if(data.a3) { identita.aid.a3 = data.a3; }
+          if(data.a4) { identita.aid.a4 = data.a4; }
+          if(data.a5) { identita.aid.a5 = data.a5; }   
+    }
+     callInWindow('sznIVA.IS.updateIdentities',identita);  
 };
-
-let url = 'https://c.seznam.cz/js/rc.js';
-if (queryPermission('inject_script', url)) {
-  injectScript(url, onSuccess, onFailure);
-}
 
 
 ___WEB_PERMISSIONS___
@@ -593,6 +639,45 @@ ___WEB_PERMISSIONS___
                     "boolean": true
                   }
                 ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "sznIVA.IS.updateIdentities"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  }
+                ]
               }
             ]
           }
@@ -698,6 +783,5 @@ scenarios: []
 
 ___NOTES___
 
-Created on 4/13/2020, 12:13:21 AM
-
+Created on 2/12/2024, 12:13:21 AM
 
