@@ -4,11 +4,24 @@ Short description in English: This template is dedicated to PPC platform Sklik a
 
 S touto šablonou nastavíte tagy pro retargeting i konverze. Není tedy nutné kopírovat a vkládat kódy, které vygeneruje Sklik, vše je možné dělat v příjemném uživatelském rozhraní.  
 
-Šablona podporuje verzi sledovacího kódu publikovanou 23. listopadu 2021. 
+Šablona podporuje verzi sledovacího kódu publikovanou 12. února 2024. 
 
 ``` HTML
 <script type="text/javascript" src="https://c.seznam.cz/js/rc.js"></script>
 <script>
+// Nastavení objektu identity
+	window.sznIVA.IS.updateIdentities({  
+		eid: "hodnota emailu", // Email či zahashovaný email
+		aid: {
+			"a1": "stát", // Vyplňte stát
+			"a2": "město", // Vyplňte město
+			"a3": "ulice", // Vyplňte ulici
+			"a4": "číslo popisné", // Vyplňte číslo popisné
+			"a5": "PSČ", // Vyplňte poštovní směrovací číslo
+		},
+		tid: "hodnota telefonního čísla" // Hodnota telefonního čísla
+	});
+
 var conversionConf = {
   id: 10000000, /* identifikátor konverze Sklik*/
   value: 199.9, /* hodnota objednávky v Kč*/
@@ -27,6 +40,19 @@ var conversionConf = {
 <!-- Měřící kód Sklik pro retargeting -->
 <script type="text/javascript" src="https://c.seznam.cz/js/rc.js"></script>
 <script>
+// Nastavení objektu identity
+	window.sznIVA.IS.updateIdentities({  
+		eid: "hodnota emailu", // Email či zahashovaný email
+		aid: {
+			"a1": "stát", // Vyplňte stát
+			"a2": "město", // Vyplňte město
+			"a3": "ulice", // Vyplňte ulici
+			"a4": "číslo popisné", // Vyplňte číslo popisné
+			"a5": "PSČ", // Vyplňte poštovní směrovací číslo
+		},
+		tid: "hodnota telefonního čísla" // Hodnota telefonního čísla
+	});
+
 var retargetingConf = {
   rtgId: 123456, /* identifikátor retargeting */
   itemId: "67890", /* identifikátor nabídky */
@@ -51,12 +77,12 @@ Při výběru tagu zvolte "Discover more tag types in the Community Template Gal
 
 ## Jak číst souhlas z proměnné a spouštět Sklik tag se správným oprávněním?
 Pokud chcete pouštět Sklik tag se správnou úrovní souhlasu, je více cest, jak toho dosáhnout. V políčku souhlas můžete zvolit následující možnosti:
-- **Neurčeno** - zde je Skliku odeslána hodnota -1 (undefined), tedy že stav souhlasu neznáme nebo nechceme uvést,
 - **Poskytnut** - Skliku se odešle hodnota 1, tedy že uživatel souhlasí, 
 - **Neposkytnut** - Skliku se odešle hodnota 0, tedy že uživatel nesouhlasí,
 - **Dle souhlasu v analytics_storage** - Při spuštění tagu přečte tag hodnotu z aktuálního stavu souhlasu s analytickým úložištěm dle Google Consent Mode
 - **Dle souhlasu v ad_storage** - Při spuštění tagu přečte tag hodnotu z aktuálního stavu souhlasu s reklamním úložištěm dle Google Consent Mode
 - **{{výběr proměnné}}** - můžete poslat i jakoukoliv vlastní proměnnou, ve které musí být hodnota 1 nebo 0 (ať již číslem či textem)
+- **Od poslední aktualizace není možné vybrat Neurčeno. Nezadáte-li tedy souhlas, je považováno, že souhlas nemáte. **
 
 V rámci čtení souhlasu s analytics_storage a ad_storage nepracuje tag s wait_for_update ani nespouštím znovu tag v případě změny souhlasu. Toto musíte ohlídat správnými triggery u tagu. Můžete také využít konkurenční šablonu, Sklik (červené logo), která ošetřuje i tuto možnost. 
 
