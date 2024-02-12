@@ -1,6 +1,8 @@
 homepage: "https://marketingmakers.net/"
 documentation: "https://github.com/marketingmakers/sklikgtmtemplate"
 versions:
+  - sha: 95dd633450d1f61bb33e1f4fae6754130d716bc3
+    changeNotes: Added option to update identities in Sklik tag. Consent settings update (default consent settings is 0 - denied) 
   - sha: df770491a817e9ea3fa2980c3c25463bb483e1fa
     changeNotes: Fixed problem with pageType parameter, basic support of Google Consent Mode
   - sha: 3f6fa908295561a85aaa9b1941422fe7984de751
