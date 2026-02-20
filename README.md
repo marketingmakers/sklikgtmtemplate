@@ -1,4 +1,8 @@
-# Šablona pro Sklik a Zboží retargeting a konverze do Google Tag Manager
+# Šablona pro Sklik a Zboží retargeting a konverze do Google Tag Manager 
+
+**Rozvoj této šablony byl v únoru 2026 ukončen. Pro staré měření Skliku vám bude spolehlivě fungovat, ale pokud chcete měřit novým Sklik SEM, zvolte si šablonu od Pavla Šabatky. Děkuji za přízeň!**
+
+
 
 Short description in English: This template is dedicated to PPC platform Sklik and comparison shopping engine Zbozi.cz from Seznam that is popular mainly in the Czech republic. By this template you are able to send both retargeting and conversion data. Other description follows in Czech language.
 
